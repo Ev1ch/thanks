@@ -1,0 +1,164 @@
+@import url('https://necolas.github.io/normalize.css/8.0.1/normalize.css');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+
+@import url('./particles.css');
+
+:root {
+  --dark-color: #000;
+  --light-color: #fff;
+  --maximum-z-index: 999;
+  --font-family: 'Montserrat', sans-serif;
+  --animation-time: 1s;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+* {
+  box-sizing: border-box;
+  font-size: 1.8rem;
+  font-family: var(--font-family);
+  font-weight: 700;
+}
+
+button {
+  background-color: transparent;
+  position: relative;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+}
+
+button::before {
+  position: absolute;
+  top: -1.2rem;
+  left: -1.6rem;
+  content: '';
+  width: 100%;
+  height: 100%;
+  background-color: #d5764c;
+  z-index: 1;
+  transition: calc(var(--animation-time) / 2);
+}
+
+button > span {
+  display: block;
+  position: relative;
+  padding: 20px;
+  border: 4px solid var(--dark-color);
+  z-index: 2;
+}
+
+button:hover::before {
+  top: 0;
+  left: 0;
+}
+
+.surface {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  z-index: var(--maximum-z-index);
+}
+
+.container {
+  text-align: center;
+  margin: auto;
+}
+
+.action {
+  position: relative;
+  max-height: 200px;
+  transition: var(--animation-time);
+}
+
+.action__hidden {
+  overflow: hidden;
+  max-height: 0;
+}
+
+.action_start-button {
+  animation: start-button-pointing var(--animation-time) infinite linear;
+}
+
+.action_start-button:hover {
+  animation: none;
+}
+
+.action__hidden .action_start-button {
+  animation: none;
+}
+
+.action__hidden .action_start-button::before {
+  top: 0;
+  left: 0;
+}
+
+.action_post-scriptum {
+  margin-top: 3rem;
+  font-size: 1.4rem;
+  margin-bottom: 0;
+}
+
+@keyframes start-button-pointing {
+  0% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-1rem);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  75% {
+    transform: translateY(1rem);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.gift {
+  background-color: var(--light-color);
+  overflow: hidden;
+  display: none;
+}
+
+.gift_image {
+  width: 100%;
+  height: auto;
+}
+
+.gift__showed {
+  display: block;
+  height: 0;
+  width: 0;
+  animation-delay: var(--animation-time);
+  animation-name: gift-showing;
+  animation-duration: var(--animation-time);
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes gift-showing {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    border: 8px solid var(--dark-color);
+    transform: scale(1.2);
+    height: auto;
+    width: auto;
+  }
+  100% {
+    border: 8px solid var(--dark-color);
+    transform: scale(1);
+    height: auto;
+    width: auto;
+  }
+}
