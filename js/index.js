@@ -144,9 +144,25 @@
 
   step();
 
+  function isJson(value) {
+    try {
+      JSON.parse(value);
+    } catch (error) {
+      return false;
+    }
+
+    return true;
+  }
+
   const IMAGES = [
     {
-      src: 'https://placehold.co/600x400/eeeeee/000.png',
+      src: 'https://placehold.co/600x400/eee/000.png',
+    },
+    {
+      src: 'https://placehold.co/600x400/ddd/000.png',
+    },
+    {
+      src: 'https://placehold.co/600x400/ccc/000.png',
     },
   ];
   const action = document.getElementsByClassName('action')[0];
@@ -154,7 +170,11 @@
   const gift = document.getElementsByClassName('gift')[0];
   const giftImage = document.getElementsByClassName('gift_image')[0];
 
-  const image = IMAGES[Math.floor(Math.random() * IMAGES.length)];
+  const image =
+    localStorage.getItem('gift') && isJson(localStorage.getItem('gift'))
+      ? JSON.parse(localStorage.getItem('gift'))
+      : IMAGES[Math.floor(Math.random() * IMAGES.length)];
+  localStorage.setItem('gift', JSON.stringify(image));
   giftImage.src = image.src;
 
   startButton.addEventListener('click', () => {
