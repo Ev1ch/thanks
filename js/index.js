@@ -144,9 +144,18 @@
 
   step();
 
+  const IMAGES = [
+    {
+      src: 'https://placehold.co/600x400/eeeeee/000.png',
+    },
+  ];
   const action = document.getElementsByClassName('action')[0];
   const startButton = document.getElementsByClassName('action_start-button')[0];
   const gift = document.getElementsByClassName('gift')[0];
+  const giftImage = document.getElementsByClassName('gift_image')[0];
+
+  const image = IMAGES[Math.floor(Math.random() * IMAGES.length)];
+  giftImage.src = image.src;
 
   startButton.addEventListener('click', () => {
     action.classList.add('action__hidden');
