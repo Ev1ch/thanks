@@ -154,7 +154,7 @@
     return true;
   }
 
-  const IMAGES = new Array(5).fill(0).map((_, i) => ({
+  const IMAGES = new Array(6).fill(0).map((_, i) => ({
     src: `public/images/gifts/${i + 1}.png`,
   }));
   const action = document.getElementsByClassName('action')[0];
