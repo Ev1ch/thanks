@@ -154,26 +154,27 @@
     return true;
   }
 
-  const IMAGES = [
-    {
-      src: 'https://placehold.co/600x400/eee/000.png',
-    },
-    {
-      src: 'https://placehold.co/600x400/ddd/000.png',
-    },
-    {
-      src: 'https://placehold.co/600x400/ccc/000.png',
-    },
-  ];
+  const IMAGES = new Array(5).fill(0).map((_, i) => ({
+    src: `public/images/gifts/${i + 1}.png`,
+  }));
   const action = document.getElementsByClassName('action')[0];
   const startButton = document.getElementsByClassName('action_start-button')[0];
   const gift = document.getElementsByClassName('gift')[0];
   const giftImage = document.getElementsByClassName('gift_image')[0];
 
-  const image =
-    localStorage.getItem('gift') && isJson(localStorage.getItem('gift'))
-      ? JSON.parse(localStorage.getItem('gift'))
-      : IMAGES[Math.floor(Math.random() * IMAGES.length)];
+  const imageFromLocalStorage = localStorage.getItem('gift');
+  const isImageFromLocalStorageValid = Boolean(
+    imageFromLocalStorage &&
+      isJson(imageFromLocalStorage) &&
+      JSON.parse(imageFromLocalStorage)?.src &&
+      IMAGES.find(
+        (image) => image.src === JSON.parse(imageFromLocalStorage).src,
+      ),
+  );
+
+  const image = isImageFromLocalStorageValid
+    ? JSON.parse(imageFromLocalStorage)
+    : IMAGES[Math.floor(Math.random() * IMAGES.length)];
   localStorage.setItem('gift', JSON.stringify(image));
   giftImage.src = image.src;
 

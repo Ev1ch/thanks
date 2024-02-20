@@ -125,6 +125,10 @@ button:hover::before {
   background-color: var(--light-color);
   overflow: hidden;
   display: none;
+  max-width: 90%;
+  line-height: 0;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .gift_image {
